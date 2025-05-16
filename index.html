@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background: #f2f2f2;
+      text-align: center;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 600px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    #contador {
+      font-size: 3em;
+      color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>📈 Total de Análises</h2>
+    <div id="contador">0</div>
+  </div>
+
+  <div class="card">
+    <h2>🔍 Dados por Categoria</h2>
+    <canvas id="grafico" width="400" height="200"></canvas>
+  </div>
+
+  <script>
+    const contadorEl = document.getElementById("contador");
+    const ctx = document.getElementById("grafico").getContext("2d");
+
+    // Dados iniciais
+    let dados = [300, 450, 120, 380];
+
+    // Função para somar os dados
+    function calcularTotal(data) {
+      return data.reduce((a, b) => a + b, 0);
+    }
+
+    // Atualiza o contador com animação
+    function animarContador(valorFinal) {
+      let atual = 0;
+      const duracao = 1000;
+      const incremento = Math.ceil(valorFinal / (duracao / 10));
+      const intervalo = setInterval(() => {
+        atual += incremento;
+        if (atual >= valorFinal) {
+          atual = valorFinal;
+          clearInterval(intervalo);
+        }
+        contadorEl.innerText = atual.toLocaleString();
+      }, 10);
+    }
+
+    // Cria o gráfico
+    const chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Categoria A', 'B', 'C', 'D'],
+        datasets: [{
+          label: 'Quantidade',
+          data: dados,
+          backgroundColor: ['#3498db', '#2ecc71', '#f1c40f', '#e74c3c'],
+        }]
+      },
+      options: {
+        responsive: true,
+        animation: {
+          duration: 1000,
+          easing: 'easeInOutQuad'
+        },
+        plugins: {
+          legend: { display: false },
+          title: {
+            display: true,
+            text: 'Distribuição de Dados Dinâmica'
+          }
+        }
+      }
+    });
+
+    // Inicializa o contador com valor inicial
+    animarContador(calcularTotal(dados));
+
+    // Atualiza gráfico e contador dinamicamente
+    function atualizarGraficoEContador() {
+      // Gera novos dados
+      const novosDados = chart.data.datasets[0].data.map(() => {
+        return Math.floor(Math.random() * 500);
+      });
+
+      // Atualiza gráfico
+      chart.data.datasets[0].data = novosDados;
+      chart.update();
+
+      // Atualiza contador com nova soma
+      animarContador(calcularTotal(novosDados));
+    }
+
+    // Atualiza a cada 2 segundos
+    setInterval(atualizarGraficoEContador, 2000);
+  </script>
+</body>
+</html>
