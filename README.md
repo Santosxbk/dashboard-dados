@@ -1,4 +1,4 @@
-# Dashboard Dados (Simulado)
+# Dashboard Dados 
 
 Este projeto é um **dashboard visual dinâmico** feito para demonstração e testes de layout.  
 Utiliza HTML, CSS e Chart.js para mostrar gráficos e contador animado com dados fictícios.
@@ -14,13 +14,13 @@ Utiliza HTML, CSS e Chart.js para mostrar gráficos e contador animado com dados
 
 - HTML5
 - CSS3
-- JavaScript puro
+- JavaScript 
 - [Chart.js](https://www.chartjs.org/)
 
 ## Como usar
 
 1. Clone ou baixe o repositório.
-2. Abra o arquivo `index.html` em um navegador moderno.
+2. Abra o arquivo `index.html` em um navegador.
 
 ## Aviso
 
