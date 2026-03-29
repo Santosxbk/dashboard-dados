@@ -1,4 +1,4 @@
-# Dashboard Dados 
+## [Dashboard Dados](https://santosxbk.github.io/dashboard-dados/) 
 
 Este projeto é um **dashboard visual dinâmico** feito para demonstração e testes de layout.  
 Utiliza HTML, CSS e Chart.js para mostrar gráficos e contador animado com dados fictícios.
